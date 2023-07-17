@@ -8,7 +8,7 @@
 	<div>
 		<a href="/"><h1 class="hover:underline">Betting Nepal</h1></a>
 	</div>
-	<ul class="flex items-center gap-4">
+	<ul class="hidden sm:flex items-center gap-4">
 		{#if user}
 			<li class="hover:underline"><a href="/">Home</a></li>
 			<li class="hover:underline"><a href="/dashboard">Dashboard</a></li>

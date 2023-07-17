@@ -3,88 +3,204 @@ import { json } from '@sveltejs/kit';
 export function GET() {
 	const games = [
 		{
-			date: '2023-07-01',
-			venue: 'Eden Gardens, Kolkata',
-			teams: ['India', 'England'],
+			seriesName: 'ICC World Test Championship',
+			matchType: 'Test',
+			matchDay: 'Final',
+			team1: 'India',
+			team2: 'New Zealand',
+			battingTeam: 'India',
+			bowlingTeam: 'New Zealand',
 			status: 'live',
-			winning_probability: {
-				India: 0.6,
-				England: 0.4
-			}
+			score1: 225,
+			wickets1: 3,
+			score2: 180,
+			wickets2: 5,
+			overs: 65,
+			winningProbability: {
+				India: 0.65,
+				'New Zealand': 0.35
+			},
+			date: '2021-06-18'
 		},
 		{
-			date: '2023-07-05',
-			venue: "Lord's Cricket Ground, London",
-			teams: ['England', 'Australia'],
+			seriesName: 'Australia Tour of West Indies',
+			matchType: 'ODI',
+			matchDay: '1st ODI',
+			team1: 'West Indies',
+			team2: 'Australia',
+			battingTeam: 'West Indies',
+			bowlingTeam: 'Australia',
 			status: 'live',
-			winning_probability: {
-				England: 0.5,
-				Australia: 0.5
-			}
+			score1: 145,
+			wickets1: 2,
+			score2: 220,
+			wickets2: 7,
+			overs: 30,
+			winningProbability: {
+				'West Indies': 0.4,
+				Australia: 0.6
+			},
+			date: '2021-07-20'
 		},
 		{
-			date: '2023-07-08',
-			venue: 'MCG, Melbourne',
-			teams: ['Australia', 'South Africa'],
+			seriesName: 'England Tour of Pakistan',
+			matchType: 'T20',
+			matchDay: '2nd T20',
+			team1: 'Pakistan',
+			team2: 'England',
+			battingTeam: 'England',
+			bowlingTeam: 'Pakistan',
 			status: 'live',
-			winning_probability: {
-				Australia: 0.7,
-				'South Africa': 0.3
-			}
+			score1: 132,
+			wickets1: 4,
+			score2: 145,
+			wickets2: 3,
+			overs: 18,
+			winningProbability: {
+				England: 0.6,
+				Pakistan: 0.4
+			},
+			date: '2021-08-10'
 		},
 		{
-			date: '2023-07-11',
-			venue: 'Lahore Cricket Stadium, Lahore',
-			teams: ['Pakistan', 'India'],
+			seriesName: 'South Africa Tour of Sri Lanka',
+			matchType: 'Test',
+			matchDay: '3rd Test',
+			team1: 'Sri Lanka',
+			team2: 'South Africa',
+			battingTeam: 'South Africa',
+			bowlingTeam: 'Sri Lanka',
 			status: 'live',
-			winning_probability: {
-				Pakistan: 0.6,
-				India: 0.4
-			}
+			score1: 285,
+			wickets1: 6,
+			score2: 210,
+			wickets2: 8,
+			overs: 80,
+			winningProbability: {
+				'South Africa': 0.55,
+				'Sri Lanka': 0.45
+			},
+			date: '2021-09-05'
 		},
 		{
-			date: '2023-07-15',
-			venue: 'Wankhede Stadium, Mumbai',
-			teams: ['India', 'South Africa'],
+			seriesName: 'New Zealand Tour of Bangladesh',
+			matchType: 'ODI',
+			matchDay: '2nd ODI',
+			team1: 'Bangladesh',
+			team2: 'New Zealand',
+			battingTeam: 'Bangladesh',
+			bowlingTeam: 'New Zealand',
 			status: 'live',
-			winning_probability: {
-				India: 0.7,
-				'South Africa': 0.3
-			}
-		},
-		{
-			date: '2023-07-18',
-			venue: 'SCG, Sydney',
-			teams: ['Australia', 'New Zealand'],
-			status: 'live',
-			winning_probability: {
-				Australia: 0.6,
+			score1: 180,
+			wickets1: 3,
+			score2: 165,
+			wickets2: 5,
+			overs: 35,
+			winningProbability: {
+				Bangladesh: 0.6,
 				'New Zealand': 0.4
-			}
+			},
+			date: '2021-10-12'
 		},
 		{
-			date: '2023-07-22',
-			venue: 'Old Trafford, Manchester',
-			teams: ['England', 'India'],
-			status: 'upcoming'
+			seriesName: 'India Tour of Australia',
+			matchType: 'T20',
+			matchDay: '1st T20',
+			team1: 'Australia',
+			team2: 'India',
+			battingTeam: 'India',
+			bowlingTeam: 'Australia',
+			status: 'live',
+			score1: 78,
+			wickets1: 2,
+			score2: 102,
+			wickets2: 3,
+			overs: 10,
+			winningProbability: {
+				India: 0.5,
+				Australia: 0.5
+			},
+			date: '2021-11-25'
 		},
 		{
-			date: '2023-07-26',
-			venue: 'Eden Park, Auckland',
-			teams: ['New Zealand', 'Australia'],
-			status: 'upcoming'
+			seriesName: 'West Indies Tour of England',
+			matchType: 'Test',
+			matchDay: '4th Test',
+			team1: 'England',
+			team2: 'West Indies',
+			battingTeam: 'West Indies',
+			bowlingTeam: 'England',
+			status: 'live',
+			score1: 195,
+			wickets1: 4,
+			score2: 250,
+			wickets2: 3,
+			overs: 55,
+			winningProbability: {
+				England: 0.45,
+				'West Indies': 0.55
+			},
+			date: '2022-02-08'
 		},
 		{
-			date: '2023-07-29',
-			venue: 'Centurion Park, Centurion',
-			teams: ['South Africa', 'England'],
-			status: 'upcoming'
+			seriesName: 'Pakistan Super League',
+			matchType: 'T20',
+			matchDay: 'Final',
+			team1: 'Lahore Qalandars',
+			team2: 'Karachi Kings',
+			battingTeam: 'Karachi Kings',
+			bowlingTeam: 'Lahore Qalandars',
+			status: 'live',
+			score1: 140,
+			wickets1: 2,
+			score2: 125,
+			wickets2: 4,
+			overs: 15,
+			winningProbability: {
+				'Lahore Qalandars': 0.6,
+				'Karachi Kings': 0.4
+			},
+			date: '2022-03-22'
 		},
 		{
-			date: '2023-08-02',
-			venue: 'Gaddafi Stadium, Lahore',
-			teams: ['Pakistan', 'Australia'],
-			status: 'upcoming'
+			seriesName: 'South Africa Tour of India',
+			matchType: 'ODI',
+			matchDay: '3rd ODI',
+			team1: 'India',
+			team2: 'South Africa',
+			battingTeam: 'South Africa',
+			bowlingTeam: 'India',
+			status: 'live',
+			score1: 210,
+			wickets1: 5,
+			score2: 175,
+			wickets2: 7,
+			overs: 40,
+			winningProbability: {
+				India: 0.55,
+				'South Africa': 0.45
+			},
+			date: '2022-05-16'
+		},
+		{
+			seriesName: 'The Ashes',
+			matchType: 'Test',
+			matchDay: '1st Test',
+			team1: 'England',
+			team2: 'Australia',
+			battingTeam: 'Australia',
+			bowlingTeam: 'England',
+			status: 'live',
+			score1: 125,
+			wickets1: 3,
+			score2: 150,
+			wickets2: 2,
+			overs: 25,
+			winningProbability: {
+				England: 0.4,
+				Australia: 0.6
+			},
+			date: '2022-12-01'
 		}
 	];
 
