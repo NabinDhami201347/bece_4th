@@ -152,7 +152,14 @@
 			minute: 'numeric'
 		});
 	}
+
+	export let data;
+	const { bets } = data;
 </script>
+
+<svelte:head>
+	<title>Dashboard</title>
+</svelte:head>
 
 <main class="w-11/12 mx-auto my-10">
 	<div class="flex items-center p-4 rounded shadow">
@@ -162,7 +169,7 @@
 		</div>
 		<div class="flex-grow">
 			<div class="space-y-1">
-				<h2 class="text-xl font-bold mb-1">{user.name}</h2>
+				<h2 class="text-xl font-bold mb-1">{bets.username}</h2>
 				<p>
 					<strong>Success Rate:</strong>
 					{user.successRate}%
@@ -185,7 +192,8 @@
 		</div>
 	</div>
 
-	<table class="min-w-full mt-10 bg-white border border-gray-200">
+	<h2 class="text-2xl mt-4 mb-2">Created Bets</h2>
+	<table class="min-w-full bg-white border border-gray-200">
 		<thead>
 			<tr>
 				<th class="px-4 py-2 text-left">Bet ID</th>
@@ -197,23 +205,58 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each userBets as bet}
+			{#each bets?.createdBets as bet}
 				<tr>
 					<td class="px-4 py-2 border-t">{bet.id}</td>
 					<td class="px-4 py-2 border-t">
-						{bet.game.team1} vs {bet.game.team2} ({bet.game.genre})
+						{bet.teams} ({bet.gameType})
 					</td>
 					<td class="flex items-center px-4 py-2 border-t">
 						<img
 							class="w-8 h-8 rounded-full mr-2"
-							src={bet.opponent.avatar}
+							src="https://th.bing.com/th/id/OIP.i-6PPmEKt2LNnliJyYG6QQHaE7?&rs=1&pid=ImgDet"
 							alt="Opponent Avatar"
 						/>
-						{bet.opponent.username}
+						{bet.acceptor.username}
 					</td>
 					<td class="px-4 py-2 border-t">{bet.betAmount}</td>
-					<td class={`${getStatusColor(bet.result)} px-4 py-2 border-t`}>{bet.result}</td>
-					<td class="px-4 py-2 border-t">{formatDate(bet.date)}</td>
+					<td class={`${getStatusColor('Won')} px-4 py-2 border-t`}>Won</td>
+					<td class="px-4 py-2 border-t">{formatDate(bets.createdAt)}</td>
+				</tr>
+			{/each}
+		</tbody>
+	</table>
+
+	<h2 class="text-2xl mt-4 mb-2">Accepted Bets</h2>
+	<table class="min-w-full bg-white border border-gray-200">
+		<thead>
+			<tr>
+				<th class="px-4 py-2 text-left">Bet ID</th>
+				<th class="px-4 py-2 text-left">Game</th>
+				<th class="px-4 py-2 text-left">Opponent</th>
+				<th class="px-4 py-2 text-left">Bet Amount</th>
+				<th class="px-4 py-2 text-left">Result</th>
+				<th class="px-4 py-2 text-left">Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			{#each bets?.acceptedBets as bet}
+				<tr>
+					<td class="px-4 py-2 border-t">{bet.id}</td>
+					<td class="px-4 py-2 border-t">
+						{bet.teams} ({bet.gameType})
+					</td>
+					<td class="flex items-center px-4 py-2 border-t">
+						<img
+							class="w-8 h-8 rounded-full mr-2"
+							src="https://th.bing.com/th/id/OIP.i-6PPmEKt2LNnliJyYG6QQHaE7?&rs=1&pid=ImgDet"
+							alt="Opponent Avatar"
+						/>
+						{bet.creator.username}
+					</td>
+					<td class="px-4 py-2 border-t">{bet.betAmount}</td>
+					<td class={`${getStatusColor('Won')} px-4 py-2 border-t`}>Won</td>
+					<td class="px-4 py-2 border-t">{formatDate(bets.createdAt)}</td>
 				</tr>
 			{/each}
 		</tbody>

@@ -5,6 +5,10 @@
 	export let form: ActionData;
 </script>
 
+<svelte:head>
+	<title>Cric BETT | Signup</title>
+</svelte:head>
+
 <form method="POST" class="flex flex-col w-11/12 sm:w-1/2 mx-auto mt-20" use:enhance>
 	<label>
 		Username
@@ -48,7 +52,7 @@
 		Confirm Password
 		<input
 			name="confirmPassword"
-			type="confirmPassword"
+			type="password"
 			class="w-full py-2 border-2 px-4 text-gray-700 focus:outline-none"
 		/>
 	</label>

@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL") // DATABASE_URL="mysql://root:@localhost:3306/cric_bet"
+}
+
+model User {
+  id       String @id @default(uuid())
+  email    String @unique
+  username String
+  password String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  role          Role           @default(USER)
+  createdBets   Bet[]          @relation("Creator")
+  acceptedBets  Bet[]          @relation("Acceptor")
+  betSelections BetSelection[]
+}
+
+model Bet {
+  id        Int    @id @default(autoincrement())
+  teams     String
+  gameType  String
+  betAmount Int
+
+  creatorId  String
+  creator    User    @relation("Creator", fields: [creatorId], references: [id])
+  acceptorId String?
+  acceptor   User?   @relation("Acceptor", fields: [acceptorId], references: [id])
+
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  betSelections BetSelection[]
+
+  gameId Int
+  match  Match @relation("MatchBets", fields: [gameId], references: [id])
+}
+
+model BetSelection {
+  id           Int    @id @default(autoincrement())
+  selectedTeam String
+
+  betId Int
+  bet   Bet @relation(fields: [betId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@map("BetSelection")
+}
+
+model Match {
+  id                 Int      @id @default(autoincrement())
+  seriesName         String
+  matchType          String
+  matchDay           String
+  team1              String
+  team2              String
+  battingTeam        String
+  bowlingTeam        String
+  status             String
+  score1             Int
+  wickets1           Int
+  score2             Int
+  wickets2           Int
+  overs              Int
+  winningProbability Json
+  date               DateTime
+  bets               Bet[]    @relation("MatchBets")
+}
+
+enum Role {
+  USER
+  ADMIN
+}

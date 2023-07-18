@@ -1,4 +1,15 @@
-import { fail, type Actions } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
+import type { Actions, PageServerLoad } from './$types';
+
+import bcrypt from 'bcrypt';
+import { db } from '$lib/database';
+
+export const load: PageServerLoad = async ({ locals }) => {
+	// redirect user if logged in
+	if (locals.user) {
+		throw redirect(302, '/');
+	}
+};
 
 export const actions: Actions = {
 	default: async ({ request }) => {
@@ -32,5 +43,15 @@ export const actions: Actions = {
 		if (password !== confirmPassword) {
 			return fail(400, { invalidPassword: true });
 		}
+
+		await db.user.create({
+			data: {
+				username,
+				email,
+				password: await bcrypt.hash(password, 10)
+			}
+		});
+
+		throw redirect(303, '/login');
 	}
 };
